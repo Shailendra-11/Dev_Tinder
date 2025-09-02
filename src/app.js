@@ -1,18 +1,23 @@
-const express = require ("express")
+const express = require("express")
 
 
-const app  = express()
+const app = express()
 
-app.use("/" ,(req ,res)=>{
-   res.send("hi this first server")
-   
+
+
+app.use("/test", (req, res , next) => {
+  console.log("Hii")
+  // res.send("This is first port ")
+  next()
+},)
+
+app.use("/test", (req, res) => {
+  res.send("this is second port")
+
 })
 
-app.use("/test", (req ,res)=>{
-     res.send("hi this / code")
-})
 
 
-app.listen(3000,()=>{
+app.listen(777, () => {
   console.log("hi this port number")
 })
