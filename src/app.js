@@ -1,8 +1,6 @@
 const express = require("express")
-
-
 const app = express()
-
+require("./config/database")
 
 
 app.use("/test", (req, res , next) => {
@@ -12,7 +10,7 @@ app.use("/test", (req, res , next) => {
 },)
 
 app.use("/test", (req, res) => {
-  res.send("this is second port")
+  res.send("this is second response")
 
 })
 
