@@ -1,21 +1,60 @@
 const express = require("express")
+const Database = require("./config/database")
 const app = express()
-require("./config/database")
+const User = require("./model/user")
+app.use(express.json())
+
+app.post("/signup", async (req, res) => {
+  const UserObjec = new User(req.body)
+  // created a user instance model
+  try {
+    await UserObjec.save()
+    res.send("User succesfull")
+  }
+  catch (error) {
+    res.status(400).send("Error sign:" + error.message)
+  }
+})
 
 
-app.use("/test", (req, res , next) => {
-  console.log("Hii")
-  // res.send("This is first port ")
-  next()
-},)
+app.get("/user", async (req, res) => {
+  const userEmailId = req.body.email
+  try {
+    const user = await User.find({ email: userEmailId })
+    if (!user.length) {
+      res.status(404).send("User is not Found")
+    } else {
+      res.send(user)
+    }
+  } catch (error) {
+    res.status(400).send("Something is wrong" + error.message)
+  }
+})
 
-app.use("/test", (req, res) => {
-  res.send("this is second response")
 
+app.get("/feed", async (req, res) => {
+  try {
+    const user = await User.find({})
+    // if (!user.length) {
+    //   res.status(404).send("User is not Found")
+    // } else {
+      res.send(user)
+    // }
+  } catch (error) {
+    res.status(400).send("Something is wrong" + error.message)
+  }
 })
 
 
 
-app.listen(777, () => {
-  console.log("hi this port number")
-})
+
+
+Database()
+  .then(() => {
+    app.listen(777, () => {
+      console.log("hi this port number")
+    })
+  })
+  .catch((error) => {
+    console.log("No Server conntect")
+  })
