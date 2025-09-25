@@ -46,6 +46,21 @@ app.get("/feed", async (req, res) => {
 })
 
 
+app.delete("/user", async (req, res) => {
+  const id = req.body.userId
+  try {
+    const user = await User.findByIdAndDelete(id)
+    if (!user) {
+      res.status(404).send("User is not Found")
+    } else {
+      res.send("Delete success full")
+    }
+  } catch (error) {
+    res.status(400).send("Something is wrong" + error.message)
+  }
+})
+
+
 
 
 
