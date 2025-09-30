@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
      },
      email: {
           type: String,
+          lowercase:true,
           required: true,
           unique: true
 
@@ -23,7 +24,8 @@ const userSchema = new mongoose.Schema({
           type: String
      },
      photoUrl :{
-        type :String
+        type :String,
+        default:"https://www.vecteezy.com/png/35857753-people-face-avatar-icon-cartoon-character"
      },
      about :{
         type : String,
