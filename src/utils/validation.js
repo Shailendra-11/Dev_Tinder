@@ -1,6 +1,5 @@
 const validator = require("validator")
 
-
 const validateSignUpdate = (req) => {
      const { firstName, lastName, email, password, age } = req.body
      if (!firstName || !lastName) {

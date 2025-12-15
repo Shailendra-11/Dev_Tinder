@@ -17,7 +17,6 @@ app.post("/signup", async (req, res) => {
     validateSignUpdate(req)
     const { firstName, lastName, email, password, age } = req.body
     const hasPassword = await bcrypt.hash(password, 10)
-    // console.log(hasPassword)
     const UserObjec = new User({
       firstName,
       lastName,
