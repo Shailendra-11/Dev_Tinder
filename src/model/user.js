@@ -1,39 +1,25 @@
 const mongoose = require('mongoose')
 const validator = require("validator")
 const jwt = require("jsonwebtoken")
-const bcrypt = require("bcryptjs")
+const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
      firstName: {
           type: String,
           required: true,
-          minLength: 10,
-          maxLenght: 50,
      },
      lastName: {
           type: String,
           required: true,
-
      },
      email: {
           type: String,
           lowercase: true,
           required: true,
           unique: true,
-          trim: true,
-          validate(value) {
-               if (!validator.isEmail(value)) {
-                    throw new Error("Invalid Email :" + value);
-               }
-          },
      },
      password: {
           type: String,
           required: true,
-          validate(value) {
-               if (!validator.isStrongPassword(value)) {
-                    throw new Error("Enter Strong password :" + value);
-               }
-          },
      },
      age: {
           type: Number,
@@ -71,6 +57,15 @@ const userSchema = new mongoose.Schema({
      timestamps: true,
 }
 )
+
+
+userSchema.method.getjwt = async function () {
+
+}
+
+userSchema.method.passwordCompare = async function () {
+
+}
 
 const UserModel = mongoose.model("User", userSchema)
 module.exports = UserModel;
