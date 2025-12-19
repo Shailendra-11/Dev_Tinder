@@ -4,13 +4,14 @@ const Database = require("./config/database")
 const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv')
 const router = require("./router/auth.js")
-
+const routerProfile = require("./router/profile.js")
 dotenv.config()
 app.use(express.json())
 app.use(cookieParser())
 
 
 app.use("/", router)
+app.use("/", routerProfile)
 
 // app.get("/profile", async (req, res) => {
 //   try {
@@ -113,7 +114,7 @@ app.use("/", router)
 Database()
   .then(() => {
     app.listen(process.env.PORT, () => {
-      console.log("hi this port :- ",process.env.PORT)
+      console.log("hi this port :- ", process.env.PORT)
     })
   })
   .catch((error) => {
