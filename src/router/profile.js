@@ -17,7 +17,7 @@ routerProfile.get("/profile", userAuth, (req, res) => {
 })
 
 
-routerProfile.post("/profile/edit", userAuth, async (req, res) => {
+routerProfile.patch("/profile/edit", userAuth, async (req, res) => {
      try {
           if (!validateEditFields) {
                throw new Error("Invalid Edit request");
